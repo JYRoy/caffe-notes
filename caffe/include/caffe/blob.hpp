@@ -272,10 +272,10 @@ class Blob {
  protected:
   shared_ptr<SyncedMemory> data_;  // 记录数据的syncedmemory对象
   shared_ptr<SyncedMemory> diff_;  // 记录梯度的syncedmemory对象
-  shared_ptr<SyncedMemory> shape_data_;
-  vector<int> shape_;
-  int count_;
-  int capacity_;
+  shared_ptr<SyncedMemory> shape_data_;  // 记录 shape
+  vector<int> shape_;  // 数据维度
+  int count_;  // 总数据量
+  int capacity_;  // 实际开辟的存储空间的容量
 
   DISABLE_COPY_AND_ASSIGN(Blob);
 };  // class Blob
