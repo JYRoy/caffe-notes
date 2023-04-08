@@ -155,15 +155,15 @@ void* SyncedMemory::mutable_gpu_data() {
 #ifndef CPU_ONLY
 void SyncedMemory::async_gpu_push(const cudaStream_t& stream) {
   check_device();
-  CHECK(head_ == HEAD_AT_CPU);
-  if (gpu_ptr_ == NULL) {
-    CUDA_CHECK(cudaMalloc(&gpu_ptr_, size_));
+  CHECK(head_ == HEAD_AT_CPU);  // caffe_gpu_memcpy
+  if (gpu_ptr_ == NULL) {  // 没有分配显存的时候
+    CUDA_CHECK(cudaMalloc(&gpu_ptr_, size_));  // 先分配显存
     own_gpu_data_ = true;
   }
   const cudaMemcpyKind put = cudaMemcpyHostToDevice;
-  CUDA_CHECK(cudaMemcpyAsync(gpu_ptr_, cpu_ptr_, size_, put, stream));
+  CUDA_CHECK(cudaMemcpyAsync(gpu_ptr_, cpu_ptr_, size_, put, stream));  // 拷贝数据到gpu上
   // Assume caller will synchronize on the stream before use
-  head_ = SYNCED;
+  head_ = SYNCED;  // 刚拷贝完，数据是一直的
 }
 #endif
 
