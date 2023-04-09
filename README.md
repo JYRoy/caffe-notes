@@ -23,7 +23,7 @@ Caffe的核心组件包含五个部分：blobs、layers、nets、solver，以及
 
 - [x] 0. 总体架构
 - [x] 1. Blob、SyncedMemory分析
-- [ ] 2. Layer分析
+- [x] 2. Layer分析
 - [ ] 3. Net分析
 - [ ] 4. Solver分析
 - [ ] 5. Proto分析
