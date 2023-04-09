@@ -56,7 +56,7 @@ template <typename Dtype>
 class LayerRegistry {
  public:
   typedef shared_ptr<Layer<Dtype> > (*Creator)(const LayerParameter&);
-  typedef std::map<string, Creator> CreatorRegistry;
+  typedef std::map<string, Creator> CreatorRegistry;  // 实际存储layer名字到对象的映射
 
   static CreatorRegistry& Registry() {
     static CreatorRegistry* g_registry_ = new CreatorRegistry();
